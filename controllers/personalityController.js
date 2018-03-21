@@ -1,9 +1,12 @@
 let PersonalityInsights = require('watson-developer-cloud/personality-insights/v3')
+const {key} = require('../config/twitter')
+const Twit = require('twit')
+const fs = require('fs')
+let traits, need;
+
 const {
   personalityConfig: { username, password }
 } = require('../config/bluemix')
-const fs = require('fs')
-let personalityRes;
 
 const pi = new PersonalityInsights({
   username,
@@ -11,70 +14,80 @@ const pi = new PersonalityInsights({
   version_date: '2017-12-12'
 })
 
-function analysePersonality(req, res, next) {
-  const { content } = req.body
-  pi.profile(
-    {
+var T = new Twit ({
+  consumer_key: key.consumerKey,
+  consumer_secret: key.consumerSecret,
+  access_token: key.accessToken,
+  access_token_secret: key.accessTokenSecret,
+  timeout_ms: 60 * 1000
+})
+
+function getTweets(handle) {
+  return T.get('statuses/user_timeline', { screen_name: 'nath_thoms', count: 200 })
+    .then(tweets => {
+      for (let key in tweets) {
+        if (key === 'data') {
+          getPersonalityInsight(tweets[key].map(tweet => tweet.text))
+        }
+      }
+    })
+} 
+
+function getPersonalityInsight(content) {
+  return new Promise((resolve, reject) => {
+    pi.profile({
       content,
       content_type: 'text/plain'
-    },
-    (err, insight) => {
-      let traits = insight.personality;
-      let needs = insight.needs;
-      compareRes(traits, needs)
-      res.json({ insight })
+    }, (err, insight) => {
+        if(err) reject(err);
+        resolve(insight);
     })
+  })
 }
 
-
-
-
-function compareRes(traits, needs) {
-  console.log(needs[2].percentile)
-  if (traits[2].children[1].percentile > 0.9) {
-    console.log('Cersei');
-  } else
-    if (traits[3].children[5].percentile > 0.9) {
-      console.log('Jon Snow');
-    } else
-      if (traits[4].children[0].percentile > 0.9) {
-        console.log('Daenerys Targaryen');
-      } else
-        if (needs[2].percentile > 0.9) {
-          console.log('Samwell Tarly');
-        } else
-          if (traits[2].children[2].percentile < 0.2) {
-            console.log('Grey Worm');
-          } else
-            if (traits[3].children[2].percentile < 0.2) {
-              console.log('Tyrion Lannister');
-            } else
-              if (traits[3].children[3].percentile > 0.9) {
-                console.log('Arya Stark');
-              } else
-                if (traits[4].children[2].percentile > 0.99) {
-                  console.log('Hodor');
-                }
+function getCharacterInfo (req, res, next) {
+  let tweets;
+  let { twit_name } = req.params;
+  getTweets(twit_name)
+    .then(tweetTexts => {
+      return getPersonalityInsight(JSON.stringify(tweets))
+    })
+    .then(insight => {
+      console.log(insight)
+      if (traits[2].children[1].percentile > 0.9) {
+        return getCharacter(0, res)
+      } else if (traits[3].children[5].percentile > 0.9) {
+        return getCharacter(1, res)
+      } else if (traits[4].children[0].percentile > 0.9) {
+        return getCharacter(2, res)
+      } else if (needs[2].percentile > 0.9) {
+        return getCharacter(3, res)
+      } else if (traits[2].children[2].percentile < 0.2) {
+        return getCharacter(4, res)
+      } else if (traits[3].children[2].percentile < 0.2) {
+        return getCharacter(5, res)
+      } else if (traits[3].children[3].percentile > 0.9) {
+        return getCharacter(6, res)
+      } else if (traits[4].children[2].percentile > 0.99) {
+        return getCharacter(7, res)
+    }
+  })
+  .catch(next)
 }
 
-
-// if (personalityResult > 0.4 && personalityResult < 0.5) {
-//   fs.readFile(`${process.cwd()}/db/characters.json`, 'utf8', (err, data) => {
-//     if (err) console.log(err);
-//     data = (JSON.parse(data));
-
-
-
-//     console.log(data[0]);
-// JSON.parse(data);
-
-// })
-//     // }
-//   }
-// }
+function getCharacter (int, res) {
+  fs.readFile(`${process.cwd()}/db/characters.json`, 'utf-8', (err, data) => {
+    if (err) {
+      console.log({ error: err })
+    } else {
+      data = JSON.parse(data)
+      res.send(data[int])
+    };
+  })
+}
 
 
 
 module.exports = {
-  analysePersonality
+  getTweets
 }

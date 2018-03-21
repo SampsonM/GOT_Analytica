@@ -1,8 +1,8 @@
 const personalityRouter = require('express').Router()
 const {
-  analysePersonality
+  getTweets
 } = require('../controllers/personalityController')
 
-personalityRouter.post('/', analysePersonality)
+personalityRouter.get('/:twit_name', getTweets)
 
 module.exports = personalityRouter;

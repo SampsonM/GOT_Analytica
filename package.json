@@ -21,6 +21,8 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
+    "npm": "^5.7.1",
+    "twit": "^2.2.9",
     "watson-developer-cloud": "^3.2.1"
   }
 }

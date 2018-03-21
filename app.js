@@ -4,7 +4,7 @@ const personalityRouter = require('./routes/personalityRouter')
 const fs = require('fs')
 
 app.use(bodyParser.json())
-app.use('/personality', personalityRouter)
+app.use('/GOTA', personalityRouter)
 
 app.use('/*', (req, res, next) => {
   next({ status: 404 })
@@ -16,5 +16,18 @@ app.use((err, req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(500).send({ msg: 'internal server error', err })
 })
+
+
+
+
+
+
+
+// document.querySelector('#submitBtn').addEventListener('click', sendTweetName)
+
+// function sendTweetName (event) {
+//   console.log(event)
+// }
+
 
 module.exports = app;
