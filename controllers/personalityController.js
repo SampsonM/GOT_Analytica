@@ -58,7 +58,7 @@ function getCharacterInfo(req, res, next) {
       if(tweetTexts.join('').split(' ').length < 1000) return null;
       else return getPersonalityInsight(JSON.stringify(tweetTexts))
     })
-    .then(i => {q
+    .then(i => {
       if (i === null) return getCharacter(7, res);
       if (i.personality[2].children[1].percentile > 0.9) {
         return getCharacter(0, res)
