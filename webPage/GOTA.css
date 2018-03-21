@@ -1,13 +1,25 @@
+:root {
+  --red: #990101;
+  --yellow: #ceb942;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100%;
   width: 100%;
   font-family: 'Cormorant Garamond', serif;
+  background: url('./got.png');
+  background-size: cover;
 }
 
 .grid {
-  height: 100%;
-  width: 100%;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
   display: grid;
   grid-template: repeat(12, 1fr) / repeat(12, 1fr);
 }
@@ -17,21 +29,68 @@ header {
   grid-row: 1 / 3;
   height: 100%;
   width: 100%;
-  background-color: #990101;
+  text-align: center;
+  background-color: var(--red);
+}
+
+header h1 {
+  font-size: 3.5rem;
 }
 
 main {
   grid-column: 3 / 11;
-  grid-row: 3 / 11;
+  grid-row: 3 / 12;
+  display: grid;
+  grid-template: repeat(6, 1fr) / repeat(6, 1fr);
   height: 100%;
   width: 100%;
   background-color: #74b2bd;
 }
 
+form {
+  grid-column: 3 / 5;
+  grid-row: 5 / 6;
+  position: relative;
+  background-color: var(--yellow);
+  border: 4px solid var(--red);
+  border-radius: 4px;
+  text-align: center;
+  padding: 25px;
+}
+
+form p {
+  font-size: 1.4em;
+  margin-bottom: 40px;
+}
+
+form input {
+  width: 50%;
+  height: 30px;
+  font-size: 1.8em;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--red);
+}
+
+form button {
+  position: relative;
+  top: -6px;
+  width: auto;
+  height: 30px;
+  color: #74b2bd;
+  background-color: var(--red);
+}
+
 footer {
   grid-column: 1 / -1;
-  grid-row: 11 / 13;
+  grid-row: 12 / 13;
   height: 100%;
   width: 100%;
-  background-color: #ceb942;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  background-color: var(--yellow);
+}
+
+footer h5 {
+  margin: 2% auto;
 }
