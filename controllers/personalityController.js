@@ -19,27 +19,60 @@ function analysePersonality(req, res, next) {
       content_type: 'text/plain'
     },
     (err, insight) => {
-      let traits = insight.personality
-      let totalPercent = traits.reduce((acc, trait) => {
-        return acc + trait.percentile
-      }, 0)
-      // personalityRes = totalPercent / traits.length
-      compareRes(totalPercent / traits.length)
+      let traits = insight.personality;
+      let needs = insight.needs;
+      compareRes(traits, needs)
       res.json({ insight })
     })
 }
 
-function compareRes(personalityResult) {
-  console.log(personalityResult);
 
-  // if (personalityResult > 0.4 && personalityResult < 0.5) {
-  fs.readFile('../db/characters.json', 'utf8', (err, data) => {
-    //JSON.parse(data);
-    console.log(data);
-  })
-  // }
 
+
+function compareRes(traits, needs) {
+  console.log(needs[2].percentile)
+  if (traits[2].children[1].percentile > 0.9) {
+    console.log('Cersei');
+  } else
+    if (traits[3].children[5].percentile > 0.9) {
+      console.log('Jon Snow');
+    } else
+      if (traits[4].children[0].percentile > 0.9) {
+        console.log('Daenerys Targaryen');
+      } else
+        if (needs[2].percentile > 0.9) {
+          console.log('Samwell Tarly');
+        } else
+          if (traits[2].children[2].percentile < 0.2) {
+            console.log('Grey Worm');
+          } else
+            if (traits[3].children[2].percentile < 0.2) {
+              console.log('Tyrion Lannister');
+            } else
+              if (traits[3].children[3].percentile > 0.9) {
+                console.log('Arya Stark');
+              } else
+                if (traits[4].children[2].percentile > 0.99) {
+                  console.log('Hodor');
+                }
 }
+
+
+// if (personalityResult > 0.4 && personalityResult < 0.5) {
+//   fs.readFile(`${process.cwd()}/db/characters.json`, 'utf8', (err, data) => {
+//     if (err) console.log(err);
+//     data = (JSON.parse(data));
+
+
+
+//     console.log(data[0]);
+// JSON.parse(data);
+
+// })
+//     // }
+//   }
+// }
+
 
 
 module.exports = {
