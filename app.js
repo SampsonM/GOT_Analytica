@@ -1,6 +1,7 @@
 const app = require('express')()
 const bodyParser = require('body-parser')
 const personalityRouter = require('./routes/personalityRouter')
+const fs = require('fs')
 
 app.use(bodyParser.json())
 app.use('/personality', personalityRouter)
