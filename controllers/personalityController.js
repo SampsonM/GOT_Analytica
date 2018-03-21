@@ -1,7 +1,8 @@
-const PersonalityInsights = require('watson-developer-cloud/personalityInsights/v3')
+let PersonalityInsights = require('watson-developer-cloud/personality-insights/v3')
 const {
   personalityConfig: { username, password }
 } = require('../config/bluemix')
+let personalityRes;
 
 const pi = new PersonalityInsights({
   username,
@@ -14,12 +15,23 @@ function analysePersonality (req, res, next) {
   pi.profile(
     {
       content,
-      content_type: 'text/plan'
+      content_type: 'text/plain'
     },
     (err, insight) => {
+      let traits = insight.personality
+      let totalPercent = traits.reduce((acc, trait) => {
+        return acc + trait.percentile
+      }, 0)
+      personalityRes = totalPercent / traits.length
+      compareRes(personalityRes)
       res.json({ insight })
     })
 }
+
+function compareRes(personalityResult) {
+  
+}
+  
 
 module.exports = {
   analysePersonality

@@ -1,9 +1,9 @@
-const app = require('express').Router()
+const app = require('express')()
 const bodyParser = require('body-parser')
 const personalityRouter = require('./routes/personalityRouter')
 
 app.use(bodyParser.json())
-app.use('/', personalityRouter)
+app.use('/personality', personalityRouter)
 
 app.use('/*', (req, res, next) => {
   next({ status: 404 })
