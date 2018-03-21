@@ -20,13 +20,13 @@
   {
     "name": "Samwell Tarly",
     "imgUrl": "https://i.ytimg.com/vi/31drUE3PfU8/maxresdefault.jpg",
-    "text": "Samwell has a heart of gold, he has your best interest at heart and will do anything to prove his worth as a grandmaester",
+    "text": "Samwell has a heart of gold, he has your best interest at heart and will do anything to prove his worth as a grandmaester, you're a curious maester",
     "trait": "Curiosity"
   },
   {
     "name": "Grey Worm",
     "imgUrl": "https://www.google.co.uk/search?q=grey+worm+funny&dcr=0&source=lnms&tbm=isch&sa=X&ved=0ahUKEwi5xYewsf3ZAhWmCMAKHf8uCIEQ_AUICigB&biw=1680&bih=955#imgrc=_DpvbHGFDnLtoM:",
-    "text": "",
+    "text": "Cheery? you're serious about what you do and have only ",
     "trait": "Cheerfulness"
   },
   {
@@ -46,5 +46,11 @@
     "imgUrl": "https://patricksponaugle.files.wordpress.com/2017/01/holdingthedoor.jpg",
     "text": "Hodor... A man of few words. you should hodor more...",
     "trait": "Melancholy"
+  },
+  {
+    "name": "Davos Seaworth",
+    "imgUrl": "http://edge.alluremedia.com.au/m/k/2017/08/scface1.jpg",
+    "text": "Davos is a humble man who enjoys a drink, he has no real personality but he is okay etc",
+    "trait": "no exciting matching trait"
   }
 ]

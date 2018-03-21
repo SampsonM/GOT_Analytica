@@ -5,4 +5,4 @@ const {
 
 personalityRouter.get('/:twit_name', getCharacterInfo)
 
-module.exports = personalityRouter;
+module.exports = personalityRouter

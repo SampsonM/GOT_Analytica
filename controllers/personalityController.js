@@ -29,10 +29,10 @@ function getTweets(handle) {
   }).then(tweets => {
     for (let key in tweets) {
       if (key === "data") {
-        return (tweets[key].map(tweet => tweet.text));
+        return (tweets[key].map(tweet => tweet.text))
       }
     }
-  });
+  })
 }
 
 function getPersonalityInsight(content) {
@@ -46,8 +46,8 @@ function getPersonalityInsight(content) {
         if (err) reject(err);
         return resolve(insight);
       }
-    );
-  });
+    )
+  })
 }
 
 function getCharacterInfo(req, res, next) {
@@ -55,25 +55,27 @@ function getCharacterInfo(req, res, next) {
   let { twit_name } = req.params;
   getTweets(twit_name)
     .then(tweetTexts => {
-      return getPersonalityInsight(JSON.stringify(tweetTexts));
+      if(tweetTexts.join('').split(' ').length < 1000) return null;
+      else return getPersonalityInsight(JSON.stringify(tweetTexts))
     })
     .then(i => {
+      if (i === null) return getCharacter(7, res);
       if (i.personality[2].children[1].percentile > 0.9) {
-        return getCharacter(0, res);
-      } else if (i.personality[3].children[5].percentile > 0.9) {
-        return getCharacter(1, res);
-      } else if (i.personality[4].children[0].percentile > 0.9) {
-        return getCharacter(2, res);
-      } else if (i.needs[2].percentile > 0.9) {
-        return getCharacter(3, res);
-      } else if (i.personality[2].children[2].percentile < 0.2) {
-        return getCharacter(4, res);
-      } else if (i.personality[3].children[2].percentile < 0.2) {
-        return getCharacter(5, res);
-      } else if (i.personality[3].children[3].percentile > 0.9) {
-        return getCharacter(6, res);
-      } else if (i.personality[4].children[2].percentile > 0.99) {
-        return getCharacter(7, res);
+        return getCharacter(0, res)
+      } else if (i.personality[3].children[5].percentile > 0.8) {
+        return getCharacter(1, res)
+      } else if (i.personality[4].children[0].percentile > 0.83) {
+        return getCharacter(2, res)
+      } else if (i.needs[2].percentile > 0.8) {
+        return getCharacter(3, res)
+      } else if (i.personality[2].children[2].percentile < 0.3) {
+        return getCharacter(4, res)
+      } else if (i.personality[3].children[2].percentile < 0.3) {
+        return getCharacter(5, res)
+      } else if (i.personality[3].children[3].percentile > 0.8) {
+        return getCharacter(6, res)
+      } else {
+        return getCharacter(8, res);
       }
     })
     .catch(next);
@@ -82,10 +84,10 @@ function getCharacterInfo(req, res, next) {
 function getCharacter(int, res) {
   fs.readFile(`${process.cwd()}/db/characters.json`, "utf-8", (err, data) => {
     if (err) {
-      console.log({ error: err });
+      console.log({ error: err })
     } else {
-      data = JSON.parse(data);
-      res.send(data[int]);
+      data = JSON.parse(data)
+      res.send(data[int])
     }
   });
 }
