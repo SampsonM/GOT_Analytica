@@ -1,10 +1,11 @@
 let PersonalityInsights = require("watson-developer-cloud/personality-insights/v3");
 const Twit = require("twit")
 const fs = require("fs")
-let TWITTER_key, username, password
+let TWITTER_key = {};
+let username, password
 
 if (process.env.NODE_ENV === 'production') {
-  TWITTER_key.twitter__consumer_key  = process.env.twitter__consumer_key
+  TWITTER_key.twitter__consumer_key = process.env.twitter__consumer_key
   TWITTER_key.twitter_consumerSecret = process.env.twitter_consumerSecret
   TWITTER_key.twitter_accessToken = process.env.twitter_accessToken
   TWITTER_key.twitter_accessTokenSecret = process.env.twitter_accessTokenSecret
