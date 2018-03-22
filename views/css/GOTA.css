@@ -12,7 +12,7 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'Cormorant Garamond', serif;
-  background: url('./got.png');
+  background: url('../got.png');
   background-size: cover;
 }
 
@@ -39,7 +39,7 @@ header h1 {
 
 main {
   grid-column: 3 / 11;
-  grid-row: 3 / 12;
+  grid-row: 2 / 12;
   display: grid;
   grid-template: repeat(6, 1fr) / repeat(6, 1fr);
   height: 100%;
@@ -47,20 +47,70 @@ main {
   background-color: #74b2bd;
 }
 
+.homePage {
+  grid-column: 1 / -1;
+  grid-row: 1 / 4;
+  text-align: center;
+}
+
+main p {
+  grid-row: 4 / 5;
+  grid-column: 3 / 5; 
+  text-align: center;
+  font-size: 4rem;
+  margin: 0;
+}
+
+.homePage img {
+  max-height: 100%;
+}
+
+.watsonData {
+  display: grid;
+  grid-template: repeat(6, 1fr) / repeat(6, 1fr);
+  grid-column: 2 / 6;
+  grid-row: 1 / 5;
+}
+
+.watsonData .name {
+  font-size: 2.5rem;
+  grid-column: 2 / 6;
+  grid-row: 2 / 3;
+  text-decoration: underline;
+  text-align: center; 
+}
+
+.watsonData .text {
+  grid-row: 3 / 6;
+  grid-column: 1 / 4;
+  text-align: center;
+  margin: auto 0;
+  padding: 10px;
+  font-size: 1.6rem;
+}
+
+.watsonData img {
+  grid-row: 3 / 6;
+  grid-column: 4 / 7;
+  max-width: 100%;
+  margin: auto 0;
+}
+
 form {
-  grid-column: 3 / 5;
+  grid-column: 2 / 6;
   grid-row: 5 / 6;
   position: relative;
   background-color: var(--yellow);
   border: 4px solid var(--red);
   border-radius: 4px;
   text-align: center;
-  padding: 25px;
+  padding: 10px;
 }
 
 form p {
   font-size: 1.4em;
-  margin-bottom: 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 form input {

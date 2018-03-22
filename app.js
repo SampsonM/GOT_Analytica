@@ -1,17 +1,22 @@
-const app = require('express')()
+const express = require('express')
+const app = express()
 const bodyParser = require('body-parser')
-const personalityRouter = require('./routes/personalityRouter')
 const fs = require('fs')
+  const {
+    getCharacterInfo
+} = require('./controllers/personalityController')
 const path = require('path')
+
+app.set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, 'views')))
 
 app.use(bodyParser.json())
 
-app.get('/', (res, req) => {
-  console.log(path.join(__dirname + '/webPage/index.html'))
-  res.render(path.join(__dirname + '/webPage/index.html'))
+app.get('/', (req, res) => {
+  res.render('index.ejs');
 })
 
-app.use('/GOTA', personalityRouter)
+app.get('/:twit_name', getCharacterInfo)
 
 app.use('/*', (req, res, next) => {
   next({ status: 404 })
@@ -21,8 +26,8 @@ app.use((err, req, res, next) => {
   next(err)
 })
 app.use((err, req, res, next) => {
+  console.log(err)
   res.status(500).send({ msg: 'internal server error', err })
 })
-
 
 module.exports = app;

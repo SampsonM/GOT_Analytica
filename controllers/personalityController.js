@@ -92,10 +92,10 @@ function getCharacterInfo(req, res, next) {
 function getCharacter(int, res) {
   fs.readFile(`${process.cwd()}/db/characters.json`, "utf-8", (err, data) => {
     if (err) {
-      console.log({ error: err })
+      console.log({ error: err + 'in get CHAR Func'})
     } else {
       data = JSON.parse(data)
-      res.send(data[int])
+      res.render('player', { data: data[int] })
     }
   });
 }
