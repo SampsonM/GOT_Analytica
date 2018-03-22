@@ -60,7 +60,7 @@ function getPersonalityInsight(content) {
 
 function getCharacterInfo(req, res, next) {
   let tweets;
-  let  twit_name  = req.query.twitter_name;
+  let twit_name  = req.query.twitter_name;
   getTweets(twit_name)
     .then(tweetTexts => {
       if(tweetTexts.join('').split(' ').length < 1000) return null;
