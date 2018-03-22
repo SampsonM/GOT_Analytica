@@ -1,5 +1,5 @@
 const app = require('./app.js')
 
-app.listen(6074, () => {
-  console.log('listening to port GOTA')
-})
+app.listen(process.env.PORT || 6074, () => {  // <-- (process.env.PORT || 3000) 
+  console.log('listening on PORT')
+});
