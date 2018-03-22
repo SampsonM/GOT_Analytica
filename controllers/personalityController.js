@@ -5,11 +5,10 @@ let TWITTER_key = {};
 let username, password
 
 if (process.env.NODE_ENV === 'production') {
-  TWITTER_key.twitter__consumer_key = process.env.twitter__consumer_key
-  TWITTER_key.twitter_consumerSecret = process.env.twitter_consumerSecret
-  TWITTER_key.twitter_accessToken = process.env.twitter_accessToken
-  TWITTER_key.twitter_accessTokenSecret = process.env.twitter_accessTokenSecret
-  console.log(TWITTER_key,"********GGGGGGG")
+  TWITTER_key.consumerKey = process.env.twitter__consumer_key
+  TWITTER_key.consumerSecret = process.env.twitter_consumerSecret
+  TWITTER_key.accessToken = process.env.twitter_accessToken
+  TWITTER_key.accessTokenSecret = process.env.twitter_accessTokenSecret
   username = process.env.WATSON_USERNAME
   password = process.env.WATSON_PASS
 } else {
