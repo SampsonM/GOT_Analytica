@@ -18,16 +18,4 @@ app.use((err, req, res, next) => {
 })
 
 
-
-
-
-
-
-// document.querySelector('#submitBtn').addEventListener('click', sendTweetName)
-
-// function sendTweetName (event) {
-//   console.log(event)
-// }
-
-
 module.exports = app;
