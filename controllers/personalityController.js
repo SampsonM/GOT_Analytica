@@ -4,7 +4,10 @@ const fs = require("fs")
 let TWITTER_key, username, password
 
 if (process.env.NODE_ENV === 'production') {
-  TWITTER_key = process.env.twitter_key 
+  TWITTER_key.twitter__consumer_key  = process.env.twitter__consumer_key
+  TWITTER_key.twitter_consumerSecret = process.env.twitter_consumerSecret
+  TWITTER_key.twitter_accessToken = process.env.twitter_accessToken
+  TWITTER_key.twitter_accessTokenSecret = process.env.twitter_accessTokenSecret
   username = process.env.WATSON_USERNAME
   password = process.env.WATSON_PASS
 } else {
