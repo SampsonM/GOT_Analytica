@@ -2,11 +2,15 @@ const app = require('express')()
 const bodyParser = require('body-parser')
 const personalityRouter = require('./routes/personalityRouter')
 const fs = require('fs')
+const path = require('path')
 
 app.use(bodyParser.json())
+
 app.get('/', (res, req) => {
-  res.sendFile(path.join(__dirname + '/index.html'))
+  console.log(path.join(__dirname + '/webPage/index.html'))
+  app.render(path.join(__dirname + '/webPage/index.html'))
 })
+
 app.use('/GOTA', personalityRouter)
 
 app.use('/*', (req, res, next) => {
