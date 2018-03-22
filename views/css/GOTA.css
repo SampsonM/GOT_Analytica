@@ -37,6 +37,36 @@ header h1 {
   font-size: 3.5rem;
 }
 
+.blackScreen {
+  position: fixed;
+  z-index: -1;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  animation-duration: 30s;
+  animation-name: fade;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.indexMain {
+  animation-duration: 40s;
+  animation-name: jackInTheBox;
+}
+
 main {
   grid-column: 3 / 11;
   grid-row: 2 / 12;
@@ -45,8 +75,11 @@ main {
   height: 100%;
   width: 100%;
   background-color: #74b2bd;
-  animation-duration: 50s;
-  animation-name: jackInTheBox;
+}
+
+main .noUserText {
+  grid-column: 2 / 6;
+  grid-row: 3 / 5;
 }
 
 main img {
@@ -78,6 +111,9 @@ main p {
     transform: scale(0.1) rotate(30deg);
     -webkit-transform-origin: center bottom;
     transform-origin: center bottom;
+  }
+  30% {
+    opacity: 0.2;
   }
 
   50% {

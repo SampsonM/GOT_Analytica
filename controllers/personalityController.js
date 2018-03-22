@@ -70,18 +70,18 @@ function getCharacterInfo(req, res, next) {
       if (i === null) return getCharacter(7, res);
       if (i.personality[2].children[1].percentile > 0.9) {
         return getCharacter(0, res)
-      } else if (i.personality[3].children[5].percentile > 0.8) {
+      } else if (i.personality[3].children[5].percentile > 0.99) {
         return getCharacter(1, res)
-      } else if (i.personality[4].children[0].percentile > 0.83) {
+      } else if (i.personality[4].children[0].percentile > 0.93) {
         return getCharacter(2, res)
       } else if (i.needs[2].percentile > 0.8) {
         return getCharacter(3, res)
-      } else if (i.personality[2].children[2].percentile < 0.3) {
+      } else if (i.personality[2].children[2].percentile < 0.2) {
         return getCharacter(4, res)
-      } else if (i.personality[3].children[2].percentile < 0.3) {
-        return getCharacter(5, res)
-      } else if (i.personality[3].children[3].percentile > 0.8) {
+      } else if (i.personality[3].children[2].percentile < 0.75) {
         return getCharacter(6, res)
+      } else if (i.personality[3].children[3].percentile > 0.7) {
+        return getCharacter(5, res)
       } else {
         return getCharacter(8, res);
       }
