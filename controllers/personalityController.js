@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   TWITTER_key.twitter_consumerSecret = process.env.twitter_consumerSecret
   TWITTER_key.twitter_accessToken = process.env.twitter_accessToken
   TWITTER_key.twitter_accessTokenSecret = process.env.twitter_accessTokenSecret
+  console.log(TWITTER_key,"********GGGGGGG")
   username = process.env.WATSON_USERNAME
   password = process.env.WATSON_PASS
 } else {
