@@ -1,13 +1,17 @@
 let PersonalityInsights = require("watson-developer-cloud/personality-insights/v3");
-const { key } = require("../config/twitter");
-const Twit = require("twit");
-const fs = require("fs");
-let traits, need;
+const Twit = require("twit")
+const fs = require("fs")
+let TWITTER_key, username, password
 
-const {
-  personalityConfig: { username, password }
-} = require("../config/bluemix");
-
+if (process.env.NODE_ENV === 'production') {
+  TWITTER_key = process.env.twitter_key 
+  username = process.env.WATSON_USERNAME
+  password = process.env.WATSON_PASS
+} else {
+  TWITTER_key =  require("../config/twitter").key
+  username = require("../config/bluemix").personalityConfig.username
+  password = require("../config/bluemix").personalityConfig.password
+} 
 const pi = new PersonalityInsights({
   username,
   password,
@@ -15,17 +19,17 @@ const pi = new PersonalityInsights({
 });
 
 var T = new Twit({
-  consumer_key: key.consumerKey,
-  consumer_secret: key.consumerSecret,
-  access_token: key.accessToken,
-  access_token_secret: key.accessTokenSecret,
+  consumer_key: TWITTER_key.consumerKey,
+  consumer_secret: TWITTER_key.consumerSecret,
+  access_token: TWITTER_key.accessToken,
+  access_token_secret: TWITTER_key.accessTokenSecret,
   timeout_ms: 60 * 1000
 });
 
 function getTweets(handle) {
   return T.get("statuses/user_timeline", {
     screen_name: handle,
-    count: 200
+    count: 500
   }).then(tweets => {
     for (let key in tweets) {
       if (key === "data") {
