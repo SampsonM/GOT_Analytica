@@ -45,6 +45,12 @@ main {
   height: 100%;
   width: 100%;
   background-color: #74b2bd;
+  animation-duration: 50s;
+  animation-name: jackInTheBox;
+}
+
+main img {
+  max-width: 100%;
 }
 
 .homePage {
@@ -63,6 +69,32 @@ main p {
 
 .homePage img {
   max-height: 100%;
+}
+
+@keyframes jackInTheBox {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.1) rotate(30deg);
+    transform: scale(0.1) rotate(30deg);
+    -webkit-transform-origin: center bottom;
+    transform-origin: center bottom;
+  }
+
+  50% {
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+  }
+
+  70% {
+    -webkit-transform: rotate(3deg);
+    transform: rotate(3deg);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }
 
 .watsonData {
@@ -105,6 +137,10 @@ form {
   border-radius: 4px;
   text-align: center;
   padding: 10px;
+}
+
+form input {
+  text-align: center;
 }
 
 form p {

@@ -18,12 +18,11 @@
 
       <p>Analytica Ltd</p>
       
-      <form>
-        
+      <form action="/:twitter_name" method="get">
         <p> F**k the Kingsguard. F**k the city. F**k the king.<br><br>
           Enter your Twitter Username </p>
-        <input type="text" id="twitterName">
-        <button onclick="sendTweetName()" type ="submit" id="submitBtn">Submit</button>
+        <input type="text" id="twitterName" name="twitter_name">
+        <!-- <button type ="submit" id="submitBtn">Submit</button> -->
       </form>
     </main>
   
@@ -31,7 +30,10 @@
       <h5>No gaurentee can be made that your data will not be sold, shared, bought or borrowed. GOT_Analytics Ltd. ©</h5>
     </footer>
   </div>
-  
+
+<audio controls autoplay>
+  <source src="got.mp3" type="audio/ogg">
+</audio>
 <script src="./app.js"></script>
 </body>
 </html>
