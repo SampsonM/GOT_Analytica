@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 
 app.get('/', (res, req) => {
   console.log(path.join(__dirname + '/webPage/index.html'))
-  app.render(path.join(__dirname + '/webPage/index.html'))
+  res.render(path.join(__dirname + '/webPage/index.html'))
 })
 
 app.use('/GOTA', personalityRouter)
