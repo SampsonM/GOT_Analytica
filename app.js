@@ -4,6 +4,9 @@ const personalityRouter = require('./routes/personalityRouter')
 const fs = require('fs')
 
 app.use(bodyParser.json())
+app.get('/', (res, req) => {
+  res.sendFile(path.join(__dirname + '/index.html'))
+})
 app.use('/GOTA', personalityRouter)
 
 app.use('/*', (req, res, next) => {
