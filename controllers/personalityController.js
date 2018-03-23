@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   TWITTER_key =  require("../config/twitter").key
   username = require("../config/bluemix").personalityConfig.username
   password = require("../config/bluemix").personalityConfig.password
-} 
+}
 const pi = new PersonalityInsights({
   username,
   password,

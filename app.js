@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const fs = require('fs')
-  const {
+ const {
     getCharacterInfo
 } = require('./controllers/personalityController')
 const path = require('path')
@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'views')))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.render('index.ejs');
+  res.render('index.ejs')
 })
 
 app.get('/:twit_name', getCharacterInfo)
