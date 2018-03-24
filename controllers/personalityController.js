@@ -1,7 +1,7 @@
 let PersonalityInsights = require("watson-developer-cloud/personality-insights/v3");
 const Twit = require("twit")
 const fs = require("fs")
-let TWITTER_key = {};
+let TWITTER_key = {}
 let username, password
 
 if (process.env.NODE_ENV === 'production') {
@@ -20,7 +20,7 @@ const pi = new PersonalityInsights({
   username,
   password,
   version_date: "2017-12-12"
-});
+})
 
 var T = new Twit({
   consumer_key: TWITTER_key.consumerKey,
@@ -28,7 +28,7 @@ var T = new Twit({
   access_token: TWITTER_key.accessToken,
   access_token_secret: TWITTER_key.accessTokenSecret,
   timeout_ms: 60 * 1000
-});
+})
 
 function getTweets(handle) {
   return T.get("statuses/user_timeline", {
@@ -51,16 +51,16 @@ function getPersonalityInsight(content) {
         content_type: "text/plain"
       },
       (err, insight) => {
-        if (err) reject(err);
-        return resolve(insight);
+        if (err) reject(err)
+        return resolve(insight)
       }
     )
   })
 }
 
 function getCharacterInfo(req, res, next) {
-  let tweets;
-  let twit_name  = req.query.twitter_name;
+  let tweets
+  let twit_name  = req.query.twitter_name
   getTweets(twit_name)
     .then(tweetTexts => {
       if(tweetTexts.join('').split(' ').length < 1000) return null;
@@ -86,7 +86,7 @@ function getCharacterInfo(req, res, next) {
         return getCharacter(8, res);
       }
     })
-    .catch(next);
+    .catch(next)
 }
 
 function getCharacter(int, res) {
@@ -97,9 +97,9 @@ function getCharacter(int, res) {
       data = JSON.parse(data)
       res.render('player', { data: data[int] })
     }
-  });
+  })
 }
 
 module.exports = {
   getCharacterInfo
-};
+}
