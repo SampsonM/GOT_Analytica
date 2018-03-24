@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,32 +9,35 @@
   <link rel="stylesheet" href="/css/GOTA.css"></link>
   <title>GOT_Analytics Ltd.</title>
 </head>
+
 <body>
   <div class="grid">
     <main>
-        <a href="https://got-analytica-ltd.herokuapp.com/"><img src="gotlog.png"></a>
+      <a href="https://got-analytica-ltd.herokuapp.com/">
+        <img src="gotlog.png">
+      </a>
       <div class="watsonData">
-          <p class="name">You Are <%= data.name %></p>
-          <img src=<%= data.imgUrl %>>
-          <p class="text"><%= data.text %></p>
+        <p class="name">You Are
+          <%= data.name %>
+        </p>
+        <img src=<%=d ata.imgUrl %>>
+        <p class="text">
+          <%= data.text %>
+        </p>
       </div>
-        
       <form action="/:twitter_name" method="get">
-        <p> F**k the Kingsguard. F**k the city. F**k the king.<br><br>
-          Enter your Twitter Username </p>
+        <p> Enter your Twitter Username to finds your game of thrones character </p>
         <input type="text" id="twitterName" name="twitter_name">
-        <!-- <button action="/:twitter_name" method="get" type ="submit" id="submitBtn">Submit</button> -->
       </form>
     </main>
-  
-    <footer> 
+    <footer>
       <h5>No gaurentee can be made that your data will not be sold, shared, bought or borrowed. GOT_Analytics Ltd. ©</h5>
     </footer>
   </div>
-
-<audio controls autoplay>
-  <source src="got.mp3" type="audio/ogg">
-</audio>  
-<script src="./app.js"></script>
+  <audio controls autoplay>
+    <source src="got.mp3" type="audio/ogg">
+  </audio>
+  <script src="./app.js"></script>
 </body>
+
 </html>
