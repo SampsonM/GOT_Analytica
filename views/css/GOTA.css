@@ -86,7 +86,7 @@ main img {
   max-width: 100%;
 }
 
-.homePage {
+.main-content {
   grid-column: 1 / -1;
   grid-row: 1 / 4;
   text-align: center;
@@ -100,7 +100,7 @@ main p {
   margin: 0;
 }
 
-.homePage img {
+.main-content img {
   max-height: 100%;
 }
 
@@ -175,10 +175,6 @@ form {
   padding: 10px;
 }
 
-form input {
-  text-align: center;
-}
-
 form p {
   font-size: 1.4em;
   margin-top: 10px;
@@ -190,6 +186,7 @@ form input {
   height: 30px;
   font-size: 1.8em;
   font-family: 'Cormorant Garamond', serif;
+  text-align: center;
   color: var(--red);
 }
 

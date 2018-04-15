@@ -1,20 +1,20 @@
 let PersonalityInsights = require("watson-developer-cloud/personality-insights/v3");
-const Twit = require("twit")
-const fs = require("fs")
-let TWITTER_key = {}
-let username, password
+const Twit = require("twit");
+const fs = require("fs");
+let TWITTER_key = {};
+let username, password;
 
 if (process.env.NODE_ENV === 'production') {
-  TWITTER_key.consumerKey = process.env.twitter__consumer_key
-  TWITTER_key.consumerSecret = process.env.twitter_consumerSecret
-  TWITTER_key.accessToken = process.env.twitter_accessToken
-  TWITTER_key.accessTokenSecret = process.env.twitter_accessTokenSecret
-  username = process.env.WATSON_USERNAME
-  password = process.env.WATSON_PASS
+  TWITTER_key.consumerKey = process.env.twitter__consumer_key;
+  TWITTER_key.consumerSecret = process.env.twitter_consumerSecret;
+  TWITTER_key.accessToken = process.env.twitter_accessToken;
+  TWITTER_key.accessTokenSecret = process.env.twitter_accessTokenSecret;
+  username = process.env.WATSON_USERNAME;
+  password = process.env.WATSON_PASS;
 } else {
-  TWITTER_key =  require("../config/twitter").key
-  username = require("../config/bluemix").personalityConfig.username
-  password = require("../config/bluemix").personalityConfig.password
+  TWITTER_key =  require("../config/twitter").key;
+  username = require("../config/bluemix").personalityConfig.username;
+  password = require("../config/bluemix").personalityConfig.password;
 }
 const pi = new PersonalityInsights({
   username,
@@ -37,7 +37,7 @@ function getTweets(handle) {
   }).then(tweets => {
     for (let key in tweets) {
       if (key === "data") {
-        return (tweets[key].map(tweet => tweet.text))
+        return (tweets[key].map(tweet => tweet.text));
       }
     }
   })
@@ -51,8 +51,8 @@ function getPersonalityInsight(content) {
         content_type: "text/plain"
       },
       (err, insight) => {
-        if (err) reject(err)
-        return resolve(insight)
+        if (err) reject(err);
+        return resolve(insight);
       }
     )
   })
@@ -64,24 +64,24 @@ function getCharacterInfo(req, res, next) {
   getTweets(twit_name)
     .then(tweetTexts => {
       if(tweetTexts.join('').split(' ').length < 1000) return null;
-      else return getPersonalityInsight(JSON.stringify(tweetTexts))
+      return getPersonalityInsight(JSON.stringify(tweetTexts));
     })
     .then(i => {
       if (i === null) return getCharacter(7, res);
       if (i.personality[2].children[1].percentile > 0.9) {
-        return getCharacter(0, res)
+        return getCharacter(0, res);
       } else if (i.personality[3].children[5].percentile > 0.99) {
-        return getCharacter(1, res)
+        return getCharacter(1, res);
       } else if (i.personality[4].children[0].percentile > 0.93) {
-        return getCharacter(2, res)
+        return getCharacter(2, res);
       } else if (i.needs[2].percentile > 0.8) {
-        return getCharacter(3, res)
+        return getCharacter(3, res);
       } else if (i.personality[2].children[2].percentile < 0.2) {
-        return getCharacter(4, res)
+        return getCharacter(4, res);
       } else if (i.personality[3].children[2].percentile < 0.75) {
-        return getCharacter(6, res)
+        return getCharacter(6, res);
       } else if (i.personality[3].children[3].percentile > 0.7) {
-        return getCharacter(5, res)
+        return getCharacter(5, res);
       } else {
         return getCharacter(8, res);
       }
@@ -92,10 +92,10 @@ function getCharacterInfo(req, res, next) {
 function getCharacter(int, res) {
   fs.readFile(`${process.cwd()}/db/characters.json`, "utf-8", (err, data) => {
     if (err) {
-      console.log({ error: err + 'in get CHAR Func'})
+      console.log({ error: err + 'in get CHAR Func'});
     } else {
-      data = JSON.parse(data)
-      res.render('player', { data: data[int] })
+      data = JSON.parse(data);
+      res.render('player', { data: data[int] });
     }
   })
 }
